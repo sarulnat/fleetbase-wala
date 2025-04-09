@@ -1,0 +1,7 @@
+services:
+  application:
+    environment:
+      APP_URL: ${APP_URL}
+      CONSOLE_HOST: ${CONSOLE_HOST}
+      DATABASE_URL: ${MYSQL_URL}
+      SESSION_DOMAIN: ${SESSION_DOMAIN}
