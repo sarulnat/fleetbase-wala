@@ -5,3 +5,7 @@ services:
       CONSOLE_HOST: ${CONSOLE_HOST}
       DATABASE_URL: ${MYSQL_URL}
       SESSION_DOMAIN: ${SESSION_DOMAIN}
+  httpd:
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./docker/httpd/vhost.conf:/etc/nginx/templates/default.conf.template
