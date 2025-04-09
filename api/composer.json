@@ -25,6 +25,7 @@
         "psr/http-factory-implementation": "*",
         "resend/resend-php": "^0.14.0",
         "s-ichikawa/laravel-sendgrid-driver": "^4.0",
+        "spatie/laravel-permission": "^6.16",
         "symfony/mailgun-mailer": "^7.1",
         "symfony/postmark-mailer": "^7.1"
     },

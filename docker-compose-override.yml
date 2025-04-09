@@ -6,6 +6,9 @@ services:
       DATABASE_URL: ${MYSQL_URL}
       SESSION_DOMAIN: ${SESSION_DOMAIN}
   httpd:
+    ports:
+      - "8000:80"
+      - "443:443"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ./docker/httpd/vhost.conf:/etc/nginx/templates/default.conf.template
