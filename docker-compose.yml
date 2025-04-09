@@ -7,21 +7,21 @@ services:
       timeout: 5s
       retries: 5
 
-  database:
-    image: mysql:8.0-oracle
-    ports:
-      - "3306:3306"
-    volumes:
-      - "./docker/database/:/docker-entrypoint-initdb.d/"
-      - "./docker/database/mysql:/var/lib/mysql"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: "fleetbase"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # database:
+  #   image: mysql:8.0-oracle
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - "./docker/database/:/docker-entrypoint-initdb.d/"
+  #     - "./docker/database/mysql:/var/lib/mysql"
+  #   environment:
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  #     MYSQL_DATABASE: "fleetbase"
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   socket:
     image: socketcluster/socketcluster:v17.4.0
@@ -51,16 +51,16 @@ services:
       CACHE_URL: tcp://cache
       REDIS_URL: tcp://cache
 
-  console:
-    build:
-      context: .
-      dockerfile: console/Dockerfile.server-build
-      args:
-        ENVIRONMENT: development
-    ports:
-      - "4200:4200"
-    volumes:
-      - console-build:/console
+  # console:
+  #   build:
+  #     context: .
+  #     dockerfile: console/Dockerfile.server-build
+  #     args:
+  #       ENVIRONMENT: development
+  #   ports:
+  #     - "4200:4200"
+  #   volumes:
+  #     - console-build:/console
 
   application:
     build:
@@ -74,7 +74,7 @@ services:
       - console-build:/fleetbase/console
     environment:
       ENVIRONMENT: development
-      DATABASE_URL: "mysql://root@database/fleetbase"
+      DATABASE_URL: ${MYSQL_URL}
       QUEUE_CONNECTION: redis
       CACHE_DRIVER: redis
       CACHE_PATH: /fleetbase/api/storage/framework/cache
@@ -89,9 +89,9 @@ services:
       REGISTRY_PREINSTALLED_EXTENSIONS: 'true'
       OSRM_HOST: https://router.project-osrm.org
     depends_on:
-      - database
       - cache
       - queue
+      # - database
 
   httpd:
     build:
