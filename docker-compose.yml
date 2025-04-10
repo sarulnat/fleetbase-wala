@@ -74,7 +74,8 @@ services:
       - console-build:/fleetbase/console
     environment:
       ENVIRONMENT: development
-      DATABASE_URL: ${MYSQL_URL}
+      APP_URL: http://localhost:8000
+      DATABASE_URL: "mysql://root@database/fleetbase"
       QUEUE_CONNECTION: redis
       CACHE_DRIVER: redis
       CACHE_PATH: /fleetbase/api/storage/framework/cache
@@ -86,7 +87,7 @@ services:
       APP_NAME: Fleetbase
       LOG_CHANNEL: daily
       REGISTRY_HOST: https://registry.fleetbase.io
-      REGISTRY_PREINSTALLED_EXTENSIONS: 'true'
+      REGISTRY_PREINSTALLED_EXTENSIONS: "true"
       OSRM_HOST: https://router.project-osrm.org
     depends_on:
       - cache
