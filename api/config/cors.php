@@ -3,7 +3,6 @@
 use Fleetbase\Support\Utils;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
@@ -17,20 +16,30 @@ return [
     |
     */
 
-    'paths' => ['/*', 'sanctum/csrf-cookie'],
+    "paths" => ["/*", "sanctum/csrf-cookie"],
 
-    'allowed_methods' => ['*'],
+    "allowed_methods" => ["*"],
 
-    'allowed_origins' => array_filter(['https://fleet.robowala.ca', 'https://stores.callfaq.com', 'https://fleetbase-wala.vercel.app', env('CONSOLE_HOST'), Utils::addWwwToUrl(env('CONSOLE_HOST'))]),
+    "allowed_origins" => array_filter([
+        "http://localhost:4200",
+        "https://fleet.robowala.ca",
+        "https://stores.callfaq.com",
+        "https://fleetbase-wala.vercel.app",
+        env("CONSOLE_HOST"),
+        Utils::addWwwToUrl(env("CONSOLE_HOST")),
+    ]),
 
-    'allowed_origins_patterns' => [],
+    "allowed_origins_patterns" => [],
 
-    'allowed_headers' => ['*'],
+    "allowed_headers" => ["*"],
 
-    'exposed_headers' => ['x-compressed-json', 'access-console-sandbox', 'access-console-sandbox-key'],
+    "exposed_headers" => [
+        "x-compressed-json",
+        "access-console-sandbox",
+        "access-console-sandbox-key",
+    ],
 
-    'max_age' => 0,
+    "max_age" => 0,
 
-    'supports_credentials' => true,
-
+    "supports_credentials" => true,
 ];

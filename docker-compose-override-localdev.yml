@@ -1,0 +1,26 @@
+services:
+  database:
+    image: mysql:8.0-oracle
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./docker/database/:/docker-entrypoint-initdb.d/"
+      - "./docker/database/mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "fleetbase"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  console:
+    build:
+      context: .
+      dockerfile: console/Dockerfile.server-build
+      args:
+        ENVIRONMENT: development
+    ports:
+      - "4200:4200"
+    volumes:
+      - console-build:/console
